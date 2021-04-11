@@ -7,9 +7,16 @@ import (
 )
 
 func main() {
+	fmt.Println("Hello! Greeter has started!, and is listening on port 80 for /hello or /greet/<host name>")
 	http.HandleFunc("/hello/", HelloServer)
 	http.HandleFunc("/greet/", GreetOtherServer)
+	http.HandleFunc("/", Healthy)
 	http.ListenAndServe(":80", nil)
+}
+
+func Healthy(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "I'm healthy!")
+
 }
 
 func GreetOtherServer(w http.ResponseWriter, r *http.Request) {
